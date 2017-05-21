@@ -19,8 +19,8 @@
                         {
                         <!-- we can add some custom fields to be sent with all the log entries.-->
                         <!--make filtering easier in Logstash-->
-                        "appName": "elk-demo",
-                        "appVersion": "1.0"
+                        "appName": "skeleton-boot-app",
+                        "appVersion": "1.0.0"
                         }
                     </pattern>
                 </pattern>
