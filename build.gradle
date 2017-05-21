@@ -1,0 +1,99 @@
+plugins {
+  id 'java'
+  id 'org.springframework.boot' version '1.5.3.RELEASE'
+  id 'eclipse'
+  id 'jacoco'
+  id 'checkstyle'
+  id 'pmd'
+  id 'project-report'
+  id 'build-dashboard'
+}
+
+ext {
+  jacocoVersion = '0.7.9'
+  checkstyleVersion = '7.6.1'
+  pmdVersion = '5.6.0'
+  guavaVersion = '20.0'
+  jadiraVersion = '5.0.0.GA'
+  swaggerVersion = '2.6.1'
+}
+
+group = 'com.leanstacks'
+version = '1.7.3'
+sourceCompatibility = 1.8
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+  
+  compile group: 'org.springframework', name: 'spring-context-support'
+  
+  compile group: 'joda-time', name: 'joda-time'
+  compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-joda'
+  compile group: 'com.google.guava', name: 'guava', version: guavaVersion
+  compile group: 'com.github.ben-manes.caffeine', name: 'caffeine'
+  compile group: 'org.jadira.usertype', name: 'usertype.extended', version: jadiraVersion
+  compile group: 'org.liquibase', name: 'liquibase-core'
+  compile group: 'io.springfox', name: 'springfox-swagger2', version: swaggerVersion
+  compile group: 'io.springfox', name: 'springfox-swagger-ui', version: swaggerVersion
+  
+  runtime group: 'org.hsqldb', name: 'hsqldb'
+  runtime group: 'mysql', name: 'mysql-connector-java'
+  
+  testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+  testCompile group: 'org.springframework.security', name: 'spring-security-test'
+}
+
+defaultTasks 'clean', 'build'
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.5'
+}
+
+task encodePassword(type: JavaExec) {
+  classpath = sourceSets.test.runtimeClasspath
+  main = 'com.leanstacks.ws.util.BCryptPasswordEncoderUtil'
+  if(project.hasProperty('mainargs')) {
+    args(mainargs.split(','))
+  }
+}
+
+springBoot {
+  executable = true
+  buildInfo()
+}
+
+jacoco {
+  toolVersion = jacocoVersion
+}
+
+jacocoTestReport {
+  reports {
+    html.enabled = true
+    xml.enabled = true
+    csv.enabled = false
+  }
+}
+
+test.finalizedBy jacocoTestReport
+
+checkstyle {
+  toolVersion = checkstyleVersion
+  config = rootProject.resources.text.fromFile('etc/checkstyle/rules.xml')
+}
+
+pmd {
+  toolVersion = pmdVersion
+  ruleSetConfig = rootProject.resources.text.fromFile('etc/pmd/ruleset.xml')
+  ignoreFailures = true
+}
+
+check.finalizedBy projectReport
+
+projectReport.finalizedBy buildDashboard
