@@ -1,4 +1,4 @@
-# Project Skeleton for Spring Boot Web Services With ELK Log Management
+# Dockerized Project Skeleton for Spring Boot Web Services With ELK Log Management
 
 ## Getting Started
 
