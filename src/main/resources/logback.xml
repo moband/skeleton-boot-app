@@ -42,5 +42,5 @@
     </root>
 
     <logger name="org.springframework" level="INFO"/>
-    <logger name="com.leanstacks.ws" level="DEBUG"/>
+    <logger name="com.infotech.app" level="DEBUG"/>
 </configuration>

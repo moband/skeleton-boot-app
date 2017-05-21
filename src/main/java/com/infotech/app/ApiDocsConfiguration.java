@@ -27,15 +27,15 @@ public class ApiDocsConfiguration {
     /**
      * The project version.
      */
-    public static final String PROJECT_VERSION = "1.7.3";
+    public static final String PROJECT_VERSION = "1.0.0";
     /**
      * The project contact name.
      */
-    public static final String PROJECT_CONTACT_NAME = "LeanStacks.com";
+    public static final String PROJECT_CONTACT_NAME = "skeleton_boot_app";
     /**
      * The project contact URL.
      */
-    public static final String PROJECT_CONTACT_URL = "http://www.leanstacks.com/";
+    public static final String PROJECT_CONTACT_URL = "http://www.infotech.com/";
 
     /**
      * Create a Contact class to be used by Springfox's Swagger API Documentation framework.
