@@ -1,10 +1,4 @@
-# Project Skeleton for Spring Boot Web Services
-
-## Acknowledgements
-
-This is a [LEAN**STACKS**](http://www.leanstacks.com) solution.
-
-For more detailed information and instruction about constructing Spring Boot RESTful web services, see the book [Lean Application Engineering Featuring Backbone.Marionette and the Spring Framework](https://leanpub.com/leanstacks-marionette-spring).
+# Project Skeleton for Spring Boot Web Services With ELK Log Management
 
 ## Getting Started
 
@@ -48,6 +42,23 @@ The project provides examples of Spring Security integration.  The web service e
 #### Spring Profiles
 The project demonstrates how to use Spring Profiles to activate (or deactivate) application components and configuration.  The profiles illustrated are: batch, hsqldb, mysql, and docs.
 
+####Logback
+
+####Logstash
+Logstash Port Configured to be 5000.
+####ElasticSearch
+ElasticSearch Port Configured to be 9200.
+####Kibana
+In order to configure Kibana you would need to go to:
+http://localhost:5601/ or http://{$DOCKER_HOST_IP}:5601/
+Configure your Kibana and play with your logs.
+Note: For Mac users the port 5601 should be added to Port Forwarding Rules of you Docker Virtual Machine
+
+####Docker
+docker ps -a. Find the application image and check the exposed port (For example 0.0.0.0:8080->8080/tcp). You would be able to access the application by typing the following URL in the browser: http://localhost:8080/swagger-ui.html#!
+Note: ip address is a docker machine IP address. Here you can play with existing REST API.
+docker-compose up -d -> Docker will pull all missing images and start new containers. After a while you would be ready to use the app.
+docker-compose down  -> Stop the app Docker
 #### Unit Tests
 The project contains unit and integration test examples for standard components such as business services or batch beans and examples for the web service endpoints using mock objects.  Examples using the Spring Boot `@*Test` annotations for specific test cases are provided.
 
@@ -177,7 +188,8 @@ The `package` Maven goal is designed to prepare the application for distribution
 To execute the `package` goal, type the following command at a terminal prompt in the project base directory.
 
 ```
-mvn clean package
+mvn clean package docker:build -Dmaven.test.skip=true
+docker-compose up -d
 ```
 
 The application distribution artifact is placed in the /target directory and is named using the `artifactId` and `version` from the pom.xml file.  To run the JAR file use the following command:
@@ -325,3 +337,5 @@ Command:
 Console Output:
 Argument: clearTextPassword     Encoded: $2a$10$/BxBDZJrjJ5k9KN7gERjd.IJOZDuVYMq0HxuurnTCILGL/vbrNmBe
 ```
+## Stop the app
+Simply type: `docker-compose down`
