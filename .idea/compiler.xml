@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="skeleton-app" />
+        <module name="skeleton-boot-app" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="skeleton-app" target="1.8" />
+      <module name="skeleton-boot-app" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

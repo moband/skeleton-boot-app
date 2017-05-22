@@ -339,3 +339,19 @@ Argument: clearTextPassword     Encoded: $2a$10$/BxBDZJrjJ5k9KN7gERjd.IJOZDuVYMq
 ```
 ## Stop the app
 Simply type: `docker-compose down`
+
+
+
+spring.datasource.hikari.connection-test-query=SELECT 1 FROM DUAL
+spring.datasource.hikari.connection-timeout=10000
+spring.datasource.hikari.idle-timeout=60000
+spring.datasource.hikari.max-lifetime=300000
+spring.datasource.hikari.minimum-idle=20
+spring.datasource.hikari.maximum-pool-size=20
+spring.datasource.hikari.initialization-fail-fast=false
+spring.datasource.hikari.pool-name=springHikariCP
+spring.datasource.hikari.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.hikari.url=jdbc:mysql://localhost/skeleton?useSSL=false
+spring.datasource.hikari.username=root
+spring.datasource.hikari.password=!!password!!
+spring.datasource.hikari.type com.zaxxer.hikari.HikariDataSource
